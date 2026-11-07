@@ -39,10 +39,12 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/HyperZoneLogin/HyperzoneLogin.git .hzl-main
           cd .hzl-main
+          chmod +x ./gradlew
           ./gradlew :api:publishToMavenLocal -q
 
       - name: Build module jar
         run: |
+          chmod +x ./gradlew
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             ./gradlew clean build -PpluginVersion="${GITHUB_REF_NAME#v}"
           else
